@@ -24,6 +24,10 @@ Vagrant.configure("2") do |config|
   # mkdir -p /opt/atlassian/confluence/lib
   # mkdir -p /var/atlassian/application-data/confluence
   # cp /vagrant/mysql-connector-java-5.1.42-bin.jar /opt/atlassian/confluence/lib/
+  #
+  # mkdir -p /etc/nginx/ssl
+  #
+  # /usr/bin/openssl req -new -newkey rsa:2048 -days 365 -nodes -x509 -subj "/C=UA/ST=Ukraine/L=Lviv/O=Some Company Ttd/OU=IT/CN=dummy_hostname/emailAddress=support@site.com " -keyout /etc/nginx/site.key -out /etc/nginx/site.crt 
   ### copy confluence binary file and install
   # cp /vagrant/atlassian-confluence-6.2.1-x64.bin /tmp/
   # chmod +x /tmp/atlassian-confluence-6.2.1-x64.bin
@@ -35,9 +39,14 @@ Vagrant.configure("2") do |config|
   #### copy config files from host dir to virtual machine
   # cp /vagrant/confluence_nginx.conf /etc/nginx/sites-available/confluence
   # cp /vagrant/tomcat_server.xml /opt/atlassian/confluence/conf/server.xml
-  # /bin/sed -i "s/<insert_server_name_here>/dummy_hostname/"/etc/nginx/sites-available/confluence
+  # /bin/sed -i "s/<insert_server_name_here>/dummy_hostname/g" /etc/nginx/sites-available/confluence
+  # /bin/sed -i "s/<insert_server_name_here>/dummy_hostname/g" /opt/atlassian/confluence/conf/server.xml 
   #### enable confluence site
   # ln -s  /etc/nginx/sites-available/confluence  /etc/nginx/sites-enabled/confluence
+  #
+  # /etc/init.d/confluence start
+  #
+  # /usr/sbin/nginx -s start
   #
   #SHELL
   #
