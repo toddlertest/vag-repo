@@ -11,8 +11,34 @@ Vagrant.configure("2") do |config|
   end
   #
   #config.vm.provision "shell", inline: <<-SHELL
+  #  add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
   #  apt update
-  #  apt install -y
+  #  apt install -y mysql-server-5.6
+  #  apt install -y mysql-client-5.6
+  #  apt install -y mysql-common  
+  #  apt install -y nginx
+  #### stoping nginx
+  # /usr/sbin/nginx -s stop
+  #
+  ##### create necessary directories
+  # mkdir -p /opt/atlassian/confluence/lib
+  # mkdir -p /var/atlassian/application-data/confluence
+  #
+  ### copy confluence binary file and install
+  # cp /vagrant/atlassian-confluence-6.2.1-x64.bin /tmp/
+  # chmod +x /tmp/atlassian-confluence-6.2.1-x64.bin
+  # cd /tmp/
+  # ./atlassian-confluence-6.2.1-x64.bin
+  #
+  # /etc/init.d/confluence stop
+  # 
+  #### copy config files from host dir to virtual machine
+  # cp /vagrant/confluence_nginx.conf /etc/nginx/sites-available/confluence
+  # cp /vagrant/tomcat_server.xml /opt/atlassian/confluence/conf/server.xml
+  # /bin/sed -i "s/<insert_server_name_here>/hostname/"/etc/nginx/sites-available/confluence
+  #### enable confluence site
+  # ln -s  /etc/nginx/sites-available/confluence  /etc/nginx/sites-enabled/confluence
+  #
   #SHELL
   #
   #
